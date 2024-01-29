@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 1633442498}
   m_Layer: 3
   m_Name: MainCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -372,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 1633442497}
   serializedVersion: 2
   m_LocalRotation: {x: 0.42904615, y: -0, z: -0, w: 0.90328264}
-  m_LocalPosition: {x: 7.5, y: 10.27, z: -3.3}
+  m_LocalPosition: {x: 4.5, y: 10.27, z: -3.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -423,6 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterial: {fileID: 2100000, guid: 08cd12d2dc4a2d7409e8d2a673a7fc7e, type: 2}
+  tileSize: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
