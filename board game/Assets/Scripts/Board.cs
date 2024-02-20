@@ -4,9 +4,11 @@ public class Board : MonoBehaviour{
     [Header("Art")]
     [SerializeField] private Material tileMaterial;
     [SerializeField] private float tileSize = 1.0f;
+    [SerializeField] private float yOffset = 0.15f;
+    [SerializeField] private Vector3 boardCenter = Vector3.zero;
 
-    // [SerializeField] private float yOffSet = 0.2f;
-    // [SerializeField] private Vector3 boardCenter = Vector3.zero;
+    [Header("Prefabs and Materials")]
+    [SerializeField] private GameObject[] prefabs;
 
     // Logic
     private const int TILE_COUNT_X = 9;
@@ -14,7 +16,7 @@ public class Board : MonoBehaviour{
     private GameObject[,] tiles;
     private Camera currentCamera;
     private Vector2Int currentHover;
-    // private Vector3 bounds;
+    private Vector3 bounds;
 
     private void Awake(){
         // Find the camera in the scene
@@ -37,12 +39,9 @@ public class Board : MonoBehaviour{
         RaycastHit info;
         Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out info, 100, LayerMask.GetMask("Tile", "Hover"))){
-            Debug.Log("If statement was true.");
             // Get the indexes of the tile i've hit
             Vector2Int hitPosition = LookupTileIndex(info.transform.gameObject);
-
-            Debug.DrawRay(currentCamera.transform.position, ray.direction * 100, Color.green);
-
+            
             // If we're hovering a tile after not hovering any tiles
             if (currentHover == -Vector2Int.one)
             {
@@ -70,8 +69,8 @@ public class Board : MonoBehaviour{
 
     // Generate board
     private void GenerateGrid(float tileSize, int tileCountX, int tileCountY){
-        // yOffSet += transform.position.y;
-        // bounds = new Vector3(tileCountX/2 * tileSize, 0, tileCountX/2 * tileSize) + boardCenter;
+        yOffset += transform.position.y;
+        bounds = new Vector3(tileCountX/2 * tileSize, 0, tileCountX/2 * tileSize) + boardCenter;
         tiles = new GameObject[tileCountX, tileCountY];
         for (int x = 0; x < tileCountX; x++)
         {
@@ -91,10 +90,10 @@ public class Board : MonoBehaviour{
         tileObject.AddComponent<MeshRenderer>().material = tileMaterial;
 
         Vector3[] vertices = new Vector3[4];
-        vertices[0] = new Vector3(x * tileSize, 0, y * tileSize);
-        vertices[1] = new Vector3(x * tileSize, 0, (y + 1) * tileSize);
-        vertices[2] = new Vector3((x + 1) * tileSize, 0, y * tileSize);
-        vertices[3] = new Vector3((x + 1) * tileSize, 0, (y + 1) * tileSize);
+        vertices[0] = new Vector3(x * tileSize, yOffset , y * tileSize) - bounds;
+        vertices[1] = new Vector3(x * tileSize, yOffset, (y + 1) * tileSize) - bounds;
+        vertices[2] = new Vector3((x + 1) * tileSize, yOffset, y * tileSize) - bounds;
+        vertices[3] = new Vector3((x + 1) * tileSize, yOffset, (y + 1) * tileSize) - bounds;
 
         int[] tris = new int[] { 0, 1, 2, 1, 3, 2 };
 
@@ -106,6 +105,10 @@ public class Board : MonoBehaviour{
         tileObject.AddComponent<BoxCollider>();
 
         return tileObject;
+    }
+
+    // Spawn Units
+    private void SpawnUnit(){
     }
 
     // Helper functions
