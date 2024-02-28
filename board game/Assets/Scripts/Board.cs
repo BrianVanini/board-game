@@ -108,7 +108,12 @@ public class Board : MonoBehaviour{
     }
 
     // Spawn Units
+
+    private void SpawnAllUnits(){
+
+    }
     private void SpawnUnit(){
+        
     }
 
     // Helper functions
@@ -121,5 +126,9 @@ public class Board : MonoBehaviour{
             }
         }
         return -Vector2Int.one; //Invalid
+    }
+
+    private void moveUnit(Unit unit){
+        
     }
 }
