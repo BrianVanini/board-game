@@ -1,0 +1,5 @@
+host: localhost
+database: boardgame
+user: player
+password: player
+port: 5432

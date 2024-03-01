@@ -109,8 +109,14 @@ public class Board : MonoBehaviour{
 
     // Spawn Units
 
-    private void SpawnAllUnits(){
-
+    private void SpawnStage(){
+        //get stage info from sql
+        //spawn each enemy
+        for(int x = 0; x < 9; x++){
+            for(int y = 0; y < 9; y++){
+                
+            }
+        }
     }
     private void SpawnUnit(){
         
